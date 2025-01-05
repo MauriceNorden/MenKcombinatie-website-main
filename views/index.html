@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M en K Combinatie</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!--error div-->
+  <div id="error-div" class="hide-target">
+    <p id="error-message">Succes</p>
+    <div id="timer-div"></div>
+  </div>
+  <!--navbar-->
+  <div class="navbar-div" id="navbar">
+    <img src="assets/logo-white.svg" alt="">
+    <a href="#home">Home</a>
+    <a href="#verzoekjes">Verzoekjes</a>
+    <!--<a href="#beluisteren">Beluisteren</a>-->
+  </div>
+
+
+  <a onclick="toggelChat()">
+    <div class="chat-button">
+      <i class="far fa-comments"></i>
+
+
+    </div>
+
+  </a>
+
+  <!--home-->
+  <div class="overlay-div"></div>
+  <div class="content-div" id="home">
+    <div class="wrapper-div">
+
+      <img src="assets/logo-white.svg" alt="logo" class="logo">
+      <br>
+      <br>
+      <button href="tel:+31616151867">Direct bellen met de studio</button>
+      <h3>06 16151867</h3>
+
+    </div>
+
+
+  </div>
+  <!--verzoekjes-->
+  <div class="overlay-div"></div>
+  <div class="content-div" id="verzoekjes">
+
+    <div class="wrapper-div">
+
+      <div class="responsive-div">
+        <form action="" id="verzoekje-form">
+          <h1>Verzoekjes</h1>
+          <input type="text" placeholder="Naam" name="name" required id="naam-request">
+          <input type="text" placeholder="Verzoek" name="request" required id="nummer-request">
+          <textarea name="berichtje" cols="30" rows="10" placeholder="Type hier je bericht" required id="berichtje-input"></textarea>
+          <input type="submit" value="Versturen">
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!--mediaplayer shortcuts
+  <div class="content-div" id="beluisteren">
+
+    <div class="wrapper-div">
+
+      <img src="assets/logo-white.svg" alt="logo" class="logo">
+      <br>
+      <br>
+      <button href="tel:+31616151867">Beluisteren</button>
+      <h3>06 16151867</h3>
+
+    </div>
+
+  </div>
+  -->
+
+
+
+
+  <!--player-->
+  <div class="player-div">
+    <button class="pp-btn" onclick="togglePlay()"><i class="fas fa-pause" id="pause-ico"></i><i class="fas fa-play"
+        id="play-ico"></i></button>
+    <button class="pp-btn"><i class="fas fa-volume-up"></i></button>
+    <input id="vol-control" value="100" type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)"
+      onchange="SetVolume(this.value)" />
+
+      <div id="scroll-container">
+        <div id="scroll-text">DE M&K COMBIE TERUG OP U RADIO SMS APP 06 16151867</div>
+      </div>
+
+    <audio controls id="player">
+      <source src="https://radio.mndevs.host/radio/8000/radio.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+
+
+  <div class="chat-div" id="chat">
+
+    <section>
+      <div id="change_username" >
+        <form id="send_username">
+          <h1>Stel een gebruikersnaam in om te gaan chatten:</h1>
+
+        <input id="username" type="text" placeholder="Verander hier je gebruikersnaam"/>
+        <input type="submit" value="Verander Gebruikersnaam">
+      </form>
+      </div>
+    </section>
+
+    <section id="chatroom" >
+      <section id="feedback"></section>
+    </section>
+
+    <section id="input_zone">
+      <form id="send_message">
+        <input id="message" type="text" placeholder="Type hier je bericht"/>
+        <input type="submit" value="Verstuur">
+      </form>
+    </section>
+  </div>
+
+</body>
+
+</html>
+
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="script.js"></script>
+<script src="chat.js"></script>

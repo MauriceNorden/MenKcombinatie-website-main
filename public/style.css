@@ -1,0 +1,509 @@
+:root {
+    --green: #04aa6d;
+    --red: #ff0000;
+}
+
+body,
+html {
+    margin: auto;
+    font-family: 'Montserrat', sans-serif;
+    background-image: url("assets/achtergrond.jpg");
+    height: 100%;
+    color: white;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    scroll-behavior: smooth;
+    background-attachment: fixed;
+    scroll-padding-top: 90px;
+    width: 100%;
+
+}
+
+/*error handeling*/
+#error-div {
+    width: calc(50% - 40px);
+    background-color: white;
+    padding: 18px 20px;
+    display: none;
+    top: 0;
+    right: 0;
+    position: fixed;
+    border-bottom-left-radius: 25px;
+    z-index: 6;
+}
+
+#error-div p {
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    margin: 0px;
+}
+
+#timer-div {
+    height: 7.5px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: var(--rg);
+    animation: fadeLine 3s infinite;
+
+}
+
+/*chat*/
+.chat-button {
+    position: fixed;
+    bottom: 40%;
+    right: 0;
+    margin: 20px;
+    z-index: 4;
+    background: black;
+    border-radius: 50%;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 22px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+.chat-button:hover {
+    background: white;
+    color: black;
+    transition: 0.3s;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+
+}
+
+.chat-div {
+    width: 100%;
+    height: calc(100% - 200px);
+    top: 0;
+    position: fixed;
+    background-color: white;
+    display: none;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    z-index: 3;
+}
+
+.chat-div input,
+.chat-div button {
+    padding: 15px 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: white;
+}
+
+#change_username {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+}
+
+#change_username h1 {
+    margin: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    color: black;
+}
+
+#change_username input[type=submit] {
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+#change_username input {
+    width: calc(100% - 60px);
+    margin-bottom: 20px;
+}
+
+
+#chatroom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - 20px);
+    height: calc(100% - 310px);
+    overflow-y: scroll;
+    color: black;
+    padding: 0px 10px;
+    padding-top: 90px;
+}
+
+#input_zone {
+    position: absolute;
+    bottom: 125px;
+    left: 0;
+    width: calc(100% - 20px);
+    padding: 10px;
+}
+
+#input_zone input[type=text] {
+    width: calc(100% - 191px);
+    float: left;
+}
+
+#input_zone input[type=submit] {
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    float: right;
+}
+
+#input_zone p {
+    color: white;
+    padding: 5px;
+    margin: 0;
+    background-color: black;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+/*navbar*/
+.navbar-div {
+    position: fixed;
+    top: 0;
+    width: calc(100% - 40px);
+    z-index: 5;
+    background: black;
+    padding: 20px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+
+}
+
+.navbar-div a {
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    color: white;
+    font-weight: bold;
+    float: left;
+    line-height: 50px;
+}
+
+.navbar-div img {
+    height: 48px;
+    float: left;
+    margin-right: 40px;
+
+}
+
+.overlay-div {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-filter: blur(20px);
+    -moz-filter: blur(20px);
+    -o-filter: blur(20px);
+    -ms-filter: blur(20px);
+    filter: blur(20px);
+}
+
+.wrapper-div {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+}
+
+.content-div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+.responsive-div {
+    width: 100%;
+
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    padding-bottom: 100px;
+}
+
+
+#verzoekjes h1 {
+    color: calc;
+    border-radius: 25px;
+    background-color: black;
+    padding: 15px;
+}
+
+#verzoekjes input[type=submit] {
+    width: 75%;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+#verzoekjes input[type=submit]:hover {
+    background-color: white;
+    color: black;
+    transition: 0.3s;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+}
+
+#verzoekjes input,
+#verzoekjes textarea {
+    width: calc(100% - 22px);
+    padding: 8px;
+    padding-left: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: white;
+}
+
+.wrapper-div h1,
+h2 {
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+.wrapper-div h4{
+    margin: 2px;
+    padding: 2px;
+    font-weight: normal;
+}
+
+.logo {
+    width: 500px;
+}
+
+.wrapper-div button {
+    padding: 15px;
+    background: white;
+    color: black;
+    border: 0px solid white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+    font-weight: bold;
+    margin-top: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.wrapper-div button:hover {
+    background: black;
+    color: white;
+    transition: 0.3s;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+}
+
+/*player div*/
+
+#scroll-container {
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    margin-top: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    float: right;
+    z-index: 4;
+    position: relative;
+    display: block;
+    width: calc(75% - 115px);
+}
+
+#scroll-text {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+
+    -moz-animation: my-animation 15s linear infinite;
+    -webkit-animation: my-animation 15s linear infinite;
+    animation: my-animation 15s linear infinite;
+}
+
+
+
+#player {
+    display: none;
+
+}
+
+.player-div {
+    width: calc(100% - 60px);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    padding: 20px;
+    margin: 10px;
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.pp-btn {
+    background: none;
+    color: white;
+    border: 0px solid white;
+    cursor: pointer;
+    float: left;
+    font-size: 22px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.pp-btn:hover {
+    transition: 0.3s;
+    background-color: white;
+    color: black;
+    padding: 7px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#vol-control {
+    -webkit-appearance: none;
+    width: 25%;
+    height: 5px;
+    background: white;
+    outline: none;
+    opacity: 0.7;
+    float: left;
+    margin-top: 24px;
+}
+
+
+#vol-control::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: black;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+
+#verzoekjes {
+    background-image: url("assets/backogrund.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+
+}
+
+#pause-ico {
+    display: none;
+}
+
+/*photo slideshow*/
+
+
+#fotos h1 {
+    text-align: center;
+    margin: 15px;
+}
+
+#thumbnails-1 img,
+#main-1,
+#thumbnails-2 img,
+#main-2 {
+    transition: all 0.5s ease;
+}
+
+#thumbnails-1,
+#thumbnails-2 {
+    text-align: center;
+}
+
+#thumbnails-1 img,
+#thumbnails-2 img {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 480px) {
+
+    #thumbnails-1 img,
+    #thumbnails-2 img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+#main-1,
+#main-2 {
+    width: 75%;
+    max-height: 1000px;
+    min-height: 500px;
+    object-fit: cover;
+    margin: 20px auto;
+    display: block;
+}
+
+
+@media (max-width: 670px) {
+    .navbar-div img {
+        display: none;
+    }
+
+    .logo {
+        width: 300px;
+
+    }
+
+    #error-div {
+        width: calc(100% - 40px);
+
+
+    }
+
+}
+
+
+
+
+  /* for Firefox */
+  @-moz-keyframes my-animation {
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(-100%); }
+  }
+  
+  /* for Chrome */
+  @-webkit-keyframes my-animation {
+    from { -webkit-transform: translateX(100%); }
+    to { -webkit-transform: translateX(-100%); }
+  }
+  
+  @keyframes my-animation {
+    from {
+      -moz-transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    to {
+      -moz-transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+      transform: translateX(-100%);
+    }
+}

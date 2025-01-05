@@ -1,0 +1,27 @@
+{
+  "name": "mkcombinatie-app",
+  "version": "1.0.0",
+  "description": "Radiowebsite with the ability to chat via websockets",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngrt/simpleChatApp.git"
+  },
+  "author": "Maurice Norden",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://mkcombinatie.nl"
+  },
+  "homepage": "https://mkcombinatie.nl",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "nodemon": "^1.14.3",
+    "socket.io": "^2.0.4"
+  }
+}
