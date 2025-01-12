@@ -6,7 +6,7 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
 const cors = require('cors');
 app.use(cors());
-
+const port = 3000
 
 //routes
 app.get('/', (req, res) => {
@@ -14,8 +14,8 @@ app.get('/', (req, res) => {
 })
 
 //Listen on port 3000
-server = app.listen(3000)
-
+server = app.listen(port)
+console.log(`applicatie draait op poort: ${port}`)
 
 
 //socket.io instantiation

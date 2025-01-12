@@ -323,7 +323,7 @@ h2 {
     z-index: 4;
     position: relative;
     display: block;
-    width: calc(75% - 115px);
+    width: calc(75% - 175px);
 }
 
 #scroll-text {
@@ -357,7 +357,7 @@ h2 {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
-.pp-btn {
+.pp-btn,.vol-btn {
     background: none;
     color: white;
     border: 0px solid white;
@@ -367,6 +367,9 @@ h2 {
     margin-top: 10px;
     margin-right: 10px;
     margin-left: 10px;
+}
+.vol-btn{
+    cursor:auto;
 }
 
 .pp-btn:hover {
@@ -386,8 +389,27 @@ h2 {
     outline: none;
     opacity: 0.7;
     float: left;
-    margin-top: 24px;
+    margin-top: 20px;
 }
+#cast{
+    float: left;
+    background-color: rgba(0,0,0,0);
+    border:  rgba(0,0,0,0);
+    color: white;
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#cast:hover {
+    transition: 0.3s;
+    background-color: white;
+    color: black;
+    padding: 7px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
 
 
 #vol-control::-webkit-slider-thumb {
@@ -396,6 +418,7 @@ h2 {
     width: 20px;
     height: 20px;
     background: black;
+    border: 2px solid white;
     cursor: pointer;
     border-radius: 100%;
 }
