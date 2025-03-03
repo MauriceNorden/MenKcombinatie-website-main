@@ -323,7 +323,7 @@ h2 {
     z-index: 4;
     position: relative;
     display: block;
-    width: calc(75% - 175px);
+    width: calc(75% - 280px);
 }
 
 #scroll-text {
@@ -343,6 +343,20 @@ h2 {
 
 }
 
+.playlist-icons{
+    float: left;
+        margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.playlist-icons img{
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 2.5px;
+    margin-right: 10px;
+}
 .player-div {
     width: calc(100% - 60px);
     background-color: rgba(0, 0, 0, 0.5);
@@ -401,7 +415,7 @@ h2 {
     cursor: pointer;
 }
 
-#cast:hover {
+#cast:hover, .playlist-icons img:hover {
     transition: 0.3s;
     background-color: white;
     color: black;
