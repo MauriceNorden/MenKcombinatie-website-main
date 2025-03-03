@@ -20,7 +20,9 @@ Het uitvoeren van de docker image is ook zeer makkelijk.
 Draai hiervoor het commmando `docker run -d -p 3000:3000 mauricenorden/mkcombinatie` uit.
 Als je er helemaal klaar voor bent om het zooite in productie te nemen kun je er de flag `--restart ` aan toevoegen zodat de contianer altijd opstart.
 
+`docker run --restart=always -d -p 3000:3000 mauricenorden/mkcombinatie:latest`
 
+`docker update --restart=no 03b3500584f6`
 
 ## De docker container verkankeren
 
