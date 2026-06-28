@@ -51,6 +51,7 @@ async function startCastStream() {
         await castSession.loadMedia(new chrome.cast.media.LoadRequest(mediaInfo));
     } catch (err) {
         console.error('Cast load failed:', err);
+        errorHandeling(`Cast mislukt: ${err?.description || err?.code || 'stream kon niet worden geladen'}`, 'red', 'false');
         return;
     }
 
