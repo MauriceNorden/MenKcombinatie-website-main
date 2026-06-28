@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M&K Combinatie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            background: #0d0d14;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+        }
+
+        /* Crossfade achtergrond */
+        .cast-bg {
+            position: absolute;
+            inset: -40px;
+            background-size: cover;
+            background-position: center;
+            filter: blur(50px) brightness(0.22) saturate(1.4);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .cast-bg.active {
+            opacity: 1;
+        }
+
+        /* Donkere overlay voor leesbaarheid */
+        .cast-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.55) 0%,
+                rgba(0, 0, 0, 0.2) 60%,
+                rgba(0, 0, 0, 0.5) 100%
+            );
+        }
+
+        /* Hoofd layout */
+        .cast-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 100px 120px;
+            gap: 100px;
+        }
+
+        /* Album art */
+        .art-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+        #cast-art {
+            width: 440px;
+            height: 440px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.05);
+            transition: opacity 0.4s ease;
+        }
+        #cast-art.fading {
+            opacity: 0;
+        }
+
+        /* Tekst rechts */
+        .cast-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .cast-logo {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+            object-position: left;
+            opacity: 0.85;
+        }
+
+        .cast-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.55;
+        }
+        .cast-label-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #e53e3e;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        #cast-title {
+            font-size: 68px;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            /* Lange titels afkappen */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        #cast-artist {
+            font-size: 38px;
+            font-weight: 300;
+            opacity: 0.7;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.4; transform: scale(0.8); }
+        }
+    </style>
+    <script src="https://www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
+</head>
+<body>
+    <div id="bg-a" class="cast-bg"></div>
+    <div id="bg-b" class="cast-bg"></div>
+    <div class="cast-overlay"></div>
+
+    <div class="cast-content">
+        <div class="art-wrapper">
+            <img id="cast-art" src="/assets/favicon.svg" alt="Album art">
+        </div>
+        <div class="cast-text">
+            <img src="/assets/logo-white.svg" alt="M&K Combinatie" class="cast-logo">
+            <div class="cast-label">
+                <div class="cast-label-dot"></div>
+                Nu speelt
+            </div>
+            <div id="cast-title">M&K Combinatie</div>
+            <div id="cast-artist">Live Radio</div>
+        </div>
+    </div>
+
+    <script src="/receiver.js"></script>
+</body>
+</html>

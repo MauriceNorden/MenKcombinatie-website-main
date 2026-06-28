@@ -51,117 +51,266 @@ html {
 }
 
 /*chat*/
-.chat-button {
-    position: fixed;
-    bottom: 40%;
-    right: 0;
-    margin: 20px;
-    z-index: 4;
-    background: black;
-    border-radius: 50%;
-    padding: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 22px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-}
-
-
-.chat-button:hover {
-    background: white;
-    color: black;
-    transition: 0.3s;
-    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
-
-}
-
 .chat-div {
     width: 100%;
-    height: calc(100% - 200px);
+    height: 100%;
     top: 0;
     position: fixed;
-    background-color: white;
+    background-color: black;
     display: none;
-    padding-top: 100px;
-    padding-bottom: 100px;
     z-index: 3;
 }
 
-.chat-div input,
-.chat-div button {
-    padding: 15px 30px;
-    border: 2px solid black;
-    border-radius: 5px;
-    background: white;
+/* Player-stijl knop voor chat */
+.chat-btn {
+    background: black;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50px;
+    padding: 12px 28px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.3s;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
 }
 
-#change_username {
+.chat-btn:hover {
+    background: white;
+    color: black;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Online gebruikers balk */
+#chat-users-bar {
     position: fixed;
-    top: 40%;
+    top: 90px;
+    left: 0;
+    width: calc(100% - 38px);
+    background: black;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.65);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.online-dot {
+    width: 8px;
+    height: 8px;
+    background: #04aa6d;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px #04aa6d;
+}
+
+/* Auth paneel */
+#chat-auth-inner,
+#chat-authcode-inner {
+    position: fixed;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-
-}
-
-#change_username h1 {
-    margin: 0;
-    margin-bottom: 20px;
-    text-align: center;
-    color: black;
-}
-
-#change_username input[type=submit] {
-    width: 100%;
-    background-color: black;
+    width: min(460px, calc(100% - 40px));
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
     color: white;
 }
 
-#change_username input {
-    width: calc(100% - 60px);
-    margin-bottom: 20px;
+#chat-auth-inner h2,
+#chat-authcode-inner h2 {
+    margin: 0 0 16px;
+    color: white;
 }
 
+.chat-form-group input[type=text] {
+    width: calc(100% - 34px);
+    margin-bottom: 10px;
+    display: block;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 12px 16px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
 
+.chat-form-group input[type=text]:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.chat-form-group input[type=text]::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.chat-form-group .chat-btn {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.chat-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 24px 0;
+}
+
+.form-error {
+    color: #ff6b6b;
+    font-size: 13px;
+    margin: 0 0 10px;
+    padding: 8px 12px;
+    background: rgba(255, 0, 0, 0.12);
+    border-radius: 8px;
+}
+
+/* Auth code weergave */
+#authcode-display {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13px;
+    word-break: break-all;
+    color: white;
+    margin: 10px 0 20px;
+    font-family: monospace;
+    letter-spacing: 0.02em;
+}
+
+#chat-authcode-inner p {
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 8px;
+}
+
+#enter-chat-btn {
+    width: 100%;
+}
+
+/* Chatroom berichten */
 #chatroom {
     position: fixed;
-    top: 0;
     left: 0;
     width: calc(100% - 20px);
-    height: calc(100% - 310px);
+    height: calc(100% - 300px);
     overflow-y: scroll;
-    color: black;
-    padding: 0px 10px;
-    padding-top: 90px;
+    color: white;
+    padding: 10px;
+    padding-top: 122px;
 }
 
+.chat-message {
+    padding: 7px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.chat-message strong {
+    color: white;
+    flex-shrink: 0;
+}
+
+.msg-time {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.35);
+    flex-shrink: 0;
+}
+
+.msg-text {
+    color: rgba(255, 255, 255, 0.85);
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+}
+
+/* Uitklapbare oude berichten */
+details.old-messages {
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 8px;
+}
+
+details.old-messages summary {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.38);
+    font-size: 13px;
+    padding: 8px 10px;
+    user-select: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+details.old-messages summary:hover {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+details.old-messages summary::before {
+    content: '▶';
+    font-size: 10px;
+    transition: 0.2s;
+}
+
+details.old-messages[open] summary::before {
+    content: '▼';
+}
+
+/* Invoerveld onderaan */
 #input_zone {
     position: absolute;
-    bottom: 125px;
+    bottom: 85px;
     left: 0;
     width: calc(100% - 20px);
     padding: 10px;
 }
 
-#input_zone input[type=text] {
-    width: calc(100% - 191px);
-    float: left;
+#send_message {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
 }
 
-#input_zone input[type=submit] {
-    background-color: black;
+#message {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 12px 20px;
     color: white;
-    border: 2px solid black;
-    float: right;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
 }
 
-#input_zone p {
-    color: white;
-    padding: 5px;
-    margin: 0;
-    background-color: black;
-    margin-bottom: 5px;
-    border-radius: 5px;
+#message:focus {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+#message::placeholder {
+    color: rgba(255, 255, 255, 0.38);
+}
+
+.send-btn {
+    padding: 12px 20px;
+    flex-shrink: 0;
 }
 
 /*navbar*/
@@ -279,7 +428,7 @@ h2 {
     margin-bottom: 12px;
 }
 
-.wrapper-div h4{
+.wrapper-div h4 {
     margin: 2px;
     padding: 2px;
     font-weight: normal;
@@ -312,82 +461,90 @@ h2 {
 
 /*player div*/
 
-#scroll-container {
-    background-color: white;
-    color: black;
-    border-radius: 5px;
-    margin-top: 14px;
-    overflow: hidden;
-    white-space: nowrap;
-    float: right;
-    z-index: 4;
-    position: relative;
-    display: block;
-    width: calc(75% - 280px);
-}
-
-#scroll-text {
-    -moz-transform: translateX(100%);
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%);
-
-    -moz-animation: my-animation 15s linear infinite;
-    -webkit-animation: my-animation 15s linear infinite;
-    animation: my-animation 15s linear infinite;
-}
-
-
-
 #player {
     display: none;
-
 }
 
-.playlist-icons{
-    float: left;
-        margin-top: 10px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.playlist-icons img{
-    width: 20px;
-    height: 20px;
-    border: 1px solid white;
-    border-radius: 2.5px;
-    margin-right: 10px;
-}
 .player-div {
-    width: calc(100% - 60px);
+    width: calc(100% - 40px);
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 50px;
-    padding: 20px;
+    padding: 10px 20px;
     margin: 10px;
-    height: 50px;
     position: fixed;
     bottom: 0;
     left: 0;
     z-index: 10;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
 }
 
-.pp-btn,.vol-btn {
+.player-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-controls,
+.player-actions {
+    flex: 0 0 auto;
+}
+
+.player-nowplaying {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+}
+
+#now-playing-art {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.now-playing-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+#now-playing-title {
+    font-weight: bold;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#now-playing-artist {
+    font-size: 11px;
+    opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pp-btn,
+.vol-btn {
     background: none;
     color: white;
-    border: 0px solid white;
+    border: none;
     cursor: pointer;
-    float: left;
     font-size: 22px;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
+    padding: 0;
+    flex-shrink: 0;
 }
-.vol-btn{
-    cursor:auto;
+
+.vol-btn {
+    cursor: auto;
 }
 
 .pp-btn:hover {
-    transition: 0.3s;
     background-color: white;
     color: black;
     padding: 7px;
@@ -397,26 +554,25 @@ h2 {
 
 #vol-control {
     -webkit-appearance: none;
-    width: 25%;
+    width: 120px;
     height: 5px;
     background: white;
     outline: none;
     opacity: 0.7;
-    float: left;
-    margin-top: 20px;
-}
-#cast{
-    float: left;
-    background-color: rgba(0,0,0,0);
-    border:  rgba(0,0,0,0);
-    color: white;
-    margin-top: 10px;
-    margin-right: 10px;
-    cursor: pointer;
+    flex-shrink: 0;
 }
 
-#cast:hover, .playlist-icons img:hover {
-    transition: 0.3s;
+#cast {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+#cast:hover,
+.playlist-icons img:hover {
     background-color: white;
     color: black;
     padding: 7px;
@@ -424,7 +580,18 @@ h2 {
     transition: 0.3s;
 }
 
+.playlist-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
+.playlist-icons img {
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 2.5px;
+}
 
 #vol-control::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -520,27 +687,16 @@ h2 {
 
 
 
-  /* for Firefox */
-  @-moz-keyframes my-animation {
-    from { -moz-transform: translateX(100%); }
-    to { -moz-transform: translateX(-100%); }
-  }
-  
-  /* for Chrome */
-  @-webkit-keyframes my-animation {
-    from { -webkit-transform: translateX(100%); }
-    to { -webkit-transform: translateX(-100%); }
-  }
-  
-  @keyframes my-animation {
-    from {
-      -moz-transform: translateX(100%);
-      -webkit-transform: translateX(100%);
-      transform: translateX(100%);
+@media (max-width: 600px) {
+    .player-actions {
+        display: none;
     }
-    to {
-      -moz-transform: translateX(-100%);
-      -webkit-transform: translateX(-100%);
-      transform: translateX(-100%);
+
+    #vol-control {
+        width: 70px;
+    }
+
+    .player-nowplaying {
+        max-width: calc(100% - 160px);
     }
 }

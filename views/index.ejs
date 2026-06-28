@@ -1,183 +1,127 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-  <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>M&K Combinatie</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@32,400,0,0&icon_names=cast" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/castjs/5.3.0/cast.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-  <link rel="shortcut icon" href="assets/favicon.svg" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-</head>
+<html lang="nl">
+<%- include('_partials/head') %>
 
 <body>
-  <!--error div-->
-  <div id="error-div" class="hide-target">
-    <p id="error-message">Succes</p>
-    <div id="timer-div"></div>
-  </div>
-  <!--navbar-->
-  <div class="navbar-div" id="navbar">
-    <img src="assets/logo-white.svg" alt="">
-    <a href="#home" onclick="hideChat()">Home</a>
-    <a href="#verzoekjes" onclick="hideChat()">Verzoekjes</a>
-    <a href="#fotos" onclick="hideChat()">Foto's</a>
-    <a onclick="toggelChat()">Chat</a>
-    <!--<a href="#beluisteren">Beluisteren</a>-->
-  </div>
-
-
-  <!--Toggle Chat
-    <a onclick="toggelChat()">
-    <div class="chat-button">
-      <i class="far fa-comments"></i>
-    </div>
-  </a>-->
-
-  <!--home-->
-  <div class="overlay-div"></div>
-  <div class="content-div" id="home">
-    <div class="wrapper-div">
-
-      <img src="assets/logo-white.svg" alt="logo" class="logo">
-      <br>
-      <br>
-      <h3>Hier kunt u de volgende DJ's beluisteren:</h3>
-      <h4>M&K Combinatie</h4>
-      <h4>De Kei FM</h4>
-      <h4>Firma Knoei en Knooi</h4>
-      <h4>DJ Peter</h4>
-      <a href="#verzoekjes"><button href="tel:+31616151867">Stuur een verzoekje</button></a>
-
-
+    <div id="error-div" class="hide-target">
+        <p id="error-message">Succes</p>
+        <div id="timer-div"></div>
     </div>
 
+    <%- include('_partials/nav') %>
 
-  </div>
-  <!--verzoekjes-->
-  <div class="overlay-div"></div>
-  <div class="content-div" id="verzoekjes">
-
-    <div class="wrapper-div">
-      <div class="responsive-div">
-        <form action="" id="verzoekje-form">
-          <h1>Verzoekjes</h1>
-          <input type="text" placeholder="Naam" name="name" required id="naam-request">
-          <input type="text" placeholder="Verzoek" name="request" required id="nummer-request">
-          <textarea name="berichtje" cols="30" rows="10" placeholder="Type hier je bericht" required
-            id="berichtje-input"></textarea>
-          <input type="submit" value="Versturen">
-        </form>
-      </div>
+    <!--home-->
+    <div class="overlay-div"></div>
+    <div class="content-div" id="home">
+        <div class="wrapper-div">
+            <img src="assets/logo-white.svg" alt="logo" class="logo">
+            <br><br>
+            <h3>Hier kunt u de volgende DJ's beluisteren:</h3>
+            <h4>M&K Combinatie</h4>
+            <h4>De Kei FM</h4>
+            <h4>Firma Knoei en Knooi</h4>
+            <h4>DJ Peter</h4>
+            <a href="#verzoekjes"><button>Stuur een verzoekje</button></a>
+        </div>
     </div>
 
-  </div>
-
-  <!--fotos-->
-  <div class="content-div" id="fotos">
-
-    <div class="responsive-div">
-      <h1>Foto's</h1>
-      <img src="assets/fotos/2025/picture-1.jpeg" id="main-1">
-      <div id="thumbnails-1">
-        <img src="assets/fotos/2025/picture-1.jpeg">
-        <img src="assets/fotos/2025/picture-2.jpeg">
-        <img src="assets/fotos/2025/picture-3.jpeg">
-        <img src="assets/fotos/2025/picture-4.jpeg">
-        <img src="assets/fotos/2025/picture-5.jpeg">
-        <img src="assets/fotos/2025/picture-6.jpeg">
-        <img src="assets/fotos/2025/picture-7.jpeg">
-        <img src="assets/fotos/2025/picture-8.jpeg">
-        <img src="assets/fotos/2025/picture-9.jpeg">
-        <img src="assets/fotos/2025/picture-10.jpeg">
-
-      </div>
-    </div>
-  </div>
-
-  <!--player-->
-  <div class="player-div">
-    <button class="pp-btn" onclick="togglePlay()">
-      <i class="fas fa-pause" id="pause-ico"></i><i class="fas fa-play" id="play-ico"></i>
-    </button>
-    <button id="cast">
-      <span class="material-symbols-outlined">
-        cast
-      </span>
-    </button>
-    <div class="playlist-icons">
-      <a id="cast-m3u" href="http://radio.mndevs.host/public/m_en_k_combinatie/playlist.m3u">
-        <img src="assets/icons/vlc2.png" alt="">
-      </a>
-      <a id="cast-m3u" href="http://radio.mndevs.host/public/m_en_k_combinatie/playlist.m3u">
-        <img src="assets/icons/winamp2.png" alt="">
-      </a>
-
-      <a id="cast-pls" href="http://radio.mndevs.host/public/m_en_k_combinatie/playlist.mpls">
-        <img src="assets/icons/mediaplayer2.png" alt="">
-      </a>
+    <!--verzoekjes-->
+    <div class="overlay-div"></div>
+    <div class="content-div" id="verzoekjes">
+        <div class="wrapper-div">
+            <div class="responsive-div">
+                <form action="" id="verzoekje-form">
+                    <h1>Verzoekjes</h1>
+                    <input type="text" placeholder="Naam" name="name" required id="naam-request">
+                    <input type="text" placeholder="Verzoek" name="request" required id="nummer-request">
+                    <textarea name="berichtje" cols="30" rows="10" placeholder="Type hier je bericht" required
+                        id="berichtje-input"></textarea>
+                    <input type="submit" value="Versturen">
+                </form>
+            </div>
+        </div>
     </div>
 
-
-    <button class="vol-btn "><i class="fas fa-volume-up"></i></button>
-    <input id="vol-control" value="100" type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)"
-      onchange="SetVolume(this.value)" />
-
-    <div id="scroll-container">
-      <div id="scroll-text">DE M&K COMBINATIE TERUG OP U RADIO SMS APP 06 16151867</div>
+    <!--fotos-->
+    <div class="content-div" id="fotos">
+        <div class="responsive-div">
+            <h1>Foto's</h1>
+            <img src="assets/fotos/2025/picture-1.jpeg" id="main-1">
+            <div id="thumbnails-1">
+                <img src="assets/fotos/2025/picture-1.jpeg">
+                <img src="assets/fotos/2025/picture-2.jpeg">
+                <img src="assets/fotos/2025/picture-3.jpeg">
+                <img src="assets/fotos/2025/picture-4.jpeg">
+                <img src="assets/fotos/2025/picture-5.jpeg">
+                <img src="assets/fotos/2025/picture-6.jpeg">
+                <img src="assets/fotos/2025/picture-7.jpeg">
+                <img src="assets/fotos/2025/picture-8.jpeg">
+                <img src="assets/fotos/2025/picture-9.jpeg">
+                <img src="assets/fotos/2025/picture-10.jpeg">
+            </div>
+        </div>
     </div>
 
-    <audio controls id="player">
-      <source src="https://radio.mndevs.host/radio/8000/radio.mp3" type="audio/mpeg">
-    </audio>
-  </div>
+    <!--player-->
+    <%- include('_partials/player') %>
 
+    <!--chat-->
+    <div class="chat-div" id="chat">
 
+        <!-- Online gebruikers balk -->
+        <div id="chat-users-bar" style="display:none">
+            <span class="online-dot"></span>
+            <span id="chat-users-list">Niemand online</span>
+        </div>
 
-  <div class="chat-div" id="chat">
+        <!-- Auth: nieuwe of terugkerende gebruiker -->
+        <section id="chat-auth">
+            <div id="chat-auth-inner">
+                <div class="chat-form-group">
+                    <h2>Nieuwe gebruiker</h2>
+                    <form id="form-join">
+                        <input name="username" type="text" placeholder="Kies een gebruikersnaam" required>
+                        <button type="submit" class="chat-btn">Start chat</button>
+                    </form>
+                </div>
+                <hr class="chat-divider">
+                <div class="chat-form-group">
+                    <h2>Al eerder gechat?</h2>
+                    <form id="form-rejoin">
+                        <input name="authCode" type="text" placeholder="Jouw code" required>
+                        <button type="submit" class="chat-btn">Ga verder</button>
+                    </form>
+                </div>
+            </div>
+        </section>
 
-    <section>
-      <div id="change_username">
-        <form id="send_username">
-          <h1>Stel een naam in om te gaan chatten:</h1>
-          <input id="username" type="text" placeholder="Vul hier je gebruikersnaam in" />
-          <input type="submit" value="Begin met chatten!">
-        </form>
-      </div>
-    </section>
+        <!-- Auth code tonen na aanmaken account -->
+        <section id="chat-authcode" style="display:none">
+            <div id="chat-authcode-inner">
+                <h2>Account aangemaakt!</h2>
+                <p>Bewaar deze code om later terug te keren:</p>
+                <pre id="authcode-display"></pre>
+                <button id="enter-chat-btn" class="chat-btn">Ga naar de chat &rarr;</button>
+            </div>
+        </section>
 
-    <section id="chatroom">
+        <!-- Chatroom -->
+        <section id="chatroom" style="display:none"></section>
 
-    </section>
+        <section id="input_zone" style="display:none">
+            <form id="send_message">
+                <input id="message" type="text" placeholder="Type hier je bericht..." />
+                <button type="submit" class="chat-btn send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </section>
+    </div>
 
-    <section id="input_zone">
-      <p id="feedback"></p>
-      <form id="send_message">
-        <input id="message" type="text" placeholder="Type hier je bericht" />
-        <input type="submit" value="Verstuur">
-      </form>
-
-    </section>
-
-  </div>
-
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+    <script src="chat.js"></script>
+    <script src="stream.js"></script>
 </body>
-
 </html>
-
-
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script src="script.js"></script>
-<script src="chat.js"></script>
-<script src="stream.js"></script>

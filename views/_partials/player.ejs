@@ -1,0 +1,41 @@
+<div class="player-div">
+    <div class="player-section player-controls">
+        <button class="pp-btn" onclick="togglePlay()">
+            <i class="fas fa-pause" id="pause-ico"></i>
+            <i class="fas fa-play" id="play-ico"></i>
+        </button>
+        <button class="vol-btn"><i class="fas fa-volume-up"></i></button>
+        <input id="vol-control" value="100" type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)"
+            onchange="SetVolume(this.value)" />
+        <button id="cast">
+            <span class="material-symbols-outlined">cast</span>
+        </button>
+    </div>
+
+    <div class="player-section player-nowplaying">
+        <img id="now-playing-art" src="assets/favicon.svg" alt="Album art">
+        <div class="now-playing-info">
+            <span id="now-playing-title">M&K Combinatie</span>
+            <span id="now-playing-artist">Live Radio</span>
+        </div>
+    </div>
+
+    <div class="player-section player-actions">
+
+        <div class="playlist-icons">
+            <a href="http://radio.mndevs.host/public/m_en_k_combinatie/playlist.m3u">
+                <img src="assets/icons/vlc2.png" alt="VLC">
+            </a>
+            <a href="http://radio.mndevs.host/public/m_en_k_combinatie/playlist.m3u">
+                <img src="assets/icons/winamp2.png" alt="Winamp">
+            </a>
+            <a href="http://radio.mndevs.host/public/m_en_k_combinatie/playlist.mpls">
+                <img src="assets/icons/mediaplayer2.png" alt="Media Player">
+            </a>
+        </div>
+    </div>
+
+    <audio controls id="player">
+        <source src="https://radio.mndevs.host/radio/8000/radio.mp3" type="audio/mpeg">
+    </audio>
+</div>

@@ -18,10 +18,12 @@
   },
   "homepage": "https://mkcombinatie.nl",
   "dependencies": {
+    "better-sqlite3": "^12.11.1",
     "cors": "^2.8.5",
     "ejs": "^2.5.7",
-    "express": "^4.16.2",
-    "nodemon": "^1.14.3",
-    "socket.io": "^2.0.4"
+    "express": "^5.1.0",
+    "express-session": "^1.19.0",
+    "socket.io": "^4.8.1",
+    "uuid": "^14.0.1"
   }
 }
