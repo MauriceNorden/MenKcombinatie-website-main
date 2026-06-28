@@ -43,24 +43,28 @@ function onSessionStateChange(event) {
 async function startCastStream() {
     if (!castSession) return;
 
+    // Start de stream altijd, onafhankelijk van metadata
+    const mediaInfo = new chrome.cast.media.MediaInfo(STREAM_URL, 'audio/mpeg');
+    mediaInfo.streamType = chrome.cast.media.StreamType.LIVE;
+
     try {
-        const data = await getNowPlaying();
-        const { title, artist, art, album } = buildMetadata(data);
-
-        const mediaInfo = new chrome.cast.media.MediaInfo(STREAM_URL, 'audio/mpeg');
-        mediaInfo.streamType = chrome.cast.media.StreamType.LIVE;
-
-        const metadata = new chrome.cast.media.MusicTrackMediaMetadata();
-        metadata.title = title || 'M&K Combinatie';
-        metadata.artist = artist || 'Live Radio';
-        metadata.albumName = album || '';
-        if (art) metadata.images = [new chrome.cast.Image(art)];
-
-        mediaInfo.metadata = metadata;
-
         await castSession.loadMedia(new chrome.cast.media.LoadRequest(mediaInfo));
     } catch (err) {
         console.error('Cast load failed:', err);
+        return;
+    }
+
+    // Stuur trackinfo via custom message nadat de stream gestart is
+    try {
+        const data = await getNowPlaying();
+        const { title, artist, art } = buildMetadata(data);
+        castSession.sendMessage(CAST_NAMESPACE, {
+            title: title || 'M&K Combinatie',
+            artist: artist || 'Live Radio',
+            art: art || '',
+        });
+    } catch (err) {
+        console.error('Cast metadata send failed:', err);
     }
 }
 
