@@ -2,126 +2,127 @@
 <html lang="nl">
 <%- include('_partials/head') %>
 
-<body>
-    <div id="error-div" class="hide-target">
-        <p id="error-message">Succes</p>
-        <div id="timer-div"></div>
-    </div>
-
-    <%- include('_partials/nav') %>
-
-    <!--home-->
-    <div class="overlay-div"></div>
-    <div class="content-div" id="home">
-        <div class="wrapper-div">
-            <img src="assets/logo-white.svg" alt="logo" class="logo">
-            <br><br>
-            <h3>Hier kunt u de volgende DJ's beluisteren:</h3>
-            <h4>M&K Combinatie</h4>
-            <h4>De Kei FM</h4>
-            <h4>Firma Knoei en Knooi</h4>
-            <h4>DJ Peter</h4>
-            <a href="#verzoekjes"><button>Stuur een verzoekje</button></a>
-        </div>
-    </div>
-
-    <!--verzoekjes-->
-    <div class="overlay-div"></div>
-    <div class="content-div" id="verzoekjes">
-        <div class="wrapper-div">
-            <div class="responsive-div">
-                <form action="" id="verzoekje-form">
-                    <h1>Verzoekjes</h1>
-                    <input type="text" placeholder="Naam" name="name" required id="naam-request">
-                    <input type="text" placeholder="Verzoek" name="request" required id="nummer-request">
-                    <textarea name="berichtje" cols="30" rows="10" placeholder="Type hier je bericht" required
-                        id="berichtje-input"></textarea>
-                    <input type="submit" value="Versturen">
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!--fotos-->
-    <div class="content-div" id="fotos">
-        <div class="responsive-div">
-            <h1>Foto's</h1>
-            <img src="assets/fotos/2025/picture-1.jpeg" id="main-1">
-            <div id="thumbnails-1">
-                <img src="assets/fotos/2025/picture-1.jpeg">
-                <img src="assets/fotos/2025/picture-2.jpeg">
-                <img src="assets/fotos/2025/picture-3.jpeg">
-                <img src="assets/fotos/2025/picture-4.jpeg">
-                <img src="assets/fotos/2025/picture-5.jpeg">
-                <img src="assets/fotos/2025/picture-6.jpeg">
-                <img src="assets/fotos/2025/picture-7.jpeg">
-                <img src="assets/fotos/2025/picture-8.jpeg">
-                <img src="assets/fotos/2025/picture-9.jpeg">
-                <img src="assets/fotos/2025/picture-10.jpeg">
-            </div>
-        </div>
-    </div>
-
-    <!--player-->
-    <%- include('_partials/player') %>
-
-    <!--chat-->
-    <div class="chat-div" id="chat">
-
-        <!-- Online gebruikers balk -->
-        <div id="chat-users-bar" style="display:none">
-            <span class="online-dot"></span>
-            <span id="chat-users-list">Niemand online</span>
+    <body>
+        <div id="error-div" class="hide-target">
+            <p id="error-message">Succes</p>
+            <div id="timer-div"></div>
         </div>
 
-        <!-- Auth: nieuwe of terugkerende gebruiker -->
-        <section id="chat-auth">
-            <div id="chat-auth-inner">
-                <div class="chat-form-group">
-                    <h2>Nieuwe gebruiker</h2>
-                    <form id="form-join">
-                        <input name="username" type="text" placeholder="Kies een gebruikersnaam" required>
-                        <button type="submit" class="chat-btn">Start chat</button>
-                    </form>
-                </div>
-                <hr class="chat-divider">
-                <div class="chat-form-group">
-                    <h2>Al eerder gechat?</h2>
-                    <form id="form-rejoin">
-                        <input name="authCode" type="text" placeholder="Jouw code" required>
-                        <button type="submit" class="chat-btn">Ga verder</button>
-                    </form>
+        <%- include('_partials/nav') %>
+
+            <!--home-->
+            <div class="overlay-div"></div>
+            <div class="content-div" id="home">
+                <div class="wrapper-div">
+                    <img src="assets/logo-white.svg" alt="logo" class="logo">
+                    <br><br>
+                    <h3>Hier kunt u de volgende DJ's beluisteren:</h3>
+                    <h4>M&K Combinatie</h4>
+                    <h4>De Kei FM</h4>
+                    <h4>Firma Knoei en Knooi</h4>
+                    <h4>DJ Peter</h4>
+                    <a href="#verzoekjes"><button>Stuur een verzoekje</button></a>
                 </div>
             </div>
-        </section>
 
-        <!-- Auth code tonen na aanmaken account -->
-        <section id="chat-authcode" style="display:none">
-            <div id="chat-authcode-inner">
-                <h2>Account aangemaakt!</h2>
-                <p>Bewaar deze code om later terug te keren:</p>
-                <pre id="authcode-display"></pre>
-                <button id="enter-chat-btn" class="chat-btn">Ga naar de chat &rarr;</button>
+            <!--verzoekjes-->
+            <div class="overlay-div"></div>
+            <div class="content-div" id="verzoekjes">
+                <div class="wrapper-div">
+                    <div class="responsive-div">
+                        <form action="" id="verzoekje-form">
+                            <h1>Verzoekjes</h1>
+                            <input type="text" placeholder="Naam" name="name" required id="naam-request">
+                            <input type="text" placeholder="Verzoek" name="request" required id="nummer-request">
+                            <textarea name="berichtje" cols="30" rows="10" placeholder="Type hier je bericht" required
+                                id="berichtje-input"></textarea>
+                            <input type="submit" value="Versturen">
+                        </form>
+                    </div>
+                </div>
             </div>
-        </section>
 
-        <!-- Chatroom -->
-        <section id="chatroom" style="display:none"></section>
+            <!--fotos-->
+            <div class="content-div" id="fotos">
+                <div class="responsive-div">
+                    <h1>Foto's</h1>
+                    <img src="assets/fotos/2025/picture-1.jpeg" id="main-1">
+                    <div id="thumbnails-1">
+                        <img src="assets/fotos/2025/picture-1.jpeg">
+                        <img src="assets/fotos/2025/picture-2.jpeg">
+                        <img src="assets/fotos/2025/picture-3.jpeg">
+                        <img src="assets/fotos/2025/picture-4.jpeg">
+                        <img src="assets/fotos/2025/picture-5.jpeg">
+                        <img src="assets/fotos/2025/picture-6.jpeg">
+                        <img src="assets/fotos/2025/picture-7.jpeg">
+                        <img src="assets/fotos/2025/picture-8.jpeg">
+                        <img src="assets/fotos/2025/picture-9.jpeg">
+                        <img src="assets/fotos/2025/picture-10.jpeg">
+                    </div>
+                </div>
+            </div>
 
-        <section id="input_zone" style="display:none">
-            <form id="send_message">
-                <input id="message" type="text" placeholder="Type hier je bericht..." />
-                <button type="submit" class="chat-btn send-btn">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
-        </section>
-    </div>
+            <!--player-->
+            <%- include('_partials/player') %>
 
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="script.js"></script>
-    <script src="chat.js"></script>
-    <script src="stream.js"></script>
-</body>
+                <!--chat-->
+                <div class="chat-div" id="chat">
+
+                    <!-- Online gebruikers balk -->
+                    <div id="chat-users-bar" style="display:none">
+                        <span class="online-dot"></span>
+                        <span id="chat-users-list">Niemand online</span>
+                    </div>
+
+                    <!-- Auth: nieuwe of terugkerende gebruiker -->
+                    <section id="chat-auth">
+                        <div id="chat-auth-inner">
+                            <div class="chat-form-group">
+                                <h2>Nieuwe gebruiker</h2>
+                                <form id="form-join">
+                                    <input name="username" type="text" placeholder="Kies een gebruikersnaam" required>
+                                    <button type="submit" class="chat-btn">Start chat</button>
+                                </form>
+                            </div>
+                            <hr class="chat-divider">
+                            <div class="chat-form-group">
+                                <h2>Al eerder gechat?</h2>
+                                <form id="form-rejoin">
+                                    <input name="authCode" type="text" placeholder="Jouw code" required>
+                                    <button type="submit" class="chat-btn">Ga verder</button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Auth code tonen na aanmaken account -->
+                    <section id="chat-authcode" style="display:none">
+                        <div id="chat-authcode-inner">
+                            <h2>Account aangemaakt!</h2>
+                            <p>Bewaar deze code om later terug te keren:</p>
+                            <pre id="authcode-display"></pre>
+                            <button id="enter-chat-btn" class="chat-btn">Ga naar de chat &rarr;</button>
+                        </div>
+                    </section>
+
+                    <!-- Chatroom -->
+                    <section id="chatroom" style="display:none"></section>
+
+                    <section id="input_zone" style="display:none">
+                        <form id="send_message">
+                            <input id="message" type="text" placeholder="Type hier je bericht..." />
+                            <button type="submit" class="chat-btn send-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </section>
+                </div>
+
+                <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+                <script src="/socket.io/socket.io.js"></script>
+                <script src="script.js"></script>
+                <script src="chat.js"></script>
+                <script src="cast-sender.js"></script>
+    </body>
+
 </html>

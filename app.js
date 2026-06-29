@@ -115,17 +115,11 @@ io.on("connection", (socket) => {
     });
 });
 
-// AzuraCast webhook: fires when track or DJ changes
-app.post('/nowplaying-change', (req, res) => {
-    io.emit('nowplaying-change', req.body);
-    res.status(200).json({ ok: true });
-});
-
 app.get('/', (req, res) => {
     res.render('index');
 });
 
-// Custom Cast receiver page (runs on Chromecast device)
+// Custom Cast receiver page (runs on the Chromecast device, app id F93AB3B4)
 app.get('/cast', (req, res) => {
     res.render('cast');
 });
