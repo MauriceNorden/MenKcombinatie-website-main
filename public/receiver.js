@@ -1,6 +1,18 @@
 const NAMESPACE = 'urn:x-cast:mkcombinatie.nowplaying';
 
 const context = cast.framework.CastReceiverContext.getInstance();
+const playerManager = context.getPlayerManager();
+
+// Log player errors so chrome://inspect shows what's wrong
+playerManager.addEventListener(cast.framework.events.EventType.ERROR, (event) => {
+    console.error('[MK] Speler fout:', event.detailedErrorCode, event.error);
+});
+
+// Intercept LOAD to log stream info and catch errors before they crash the receiver
+playerManager.setMessageInterceptor(cast.framework.messages.MessageType.LOAD, (loadRequestData) => {
+    console.log('[MK] Stream laden:', loadRequestData?.media?.contentId, loadRequestData?.media?.streamType);
+    return loadRequestData;
+});
 
 let activeBg = 'a';
 
@@ -34,4 +46,8 @@ context.addCustomMessageListener(NAMESPACE, (event) => {
     updateDisplay(title, artist, art);
 });
 
-context.start();
+context.setLoggerLevel(cast.framework.LoggerLevel.DEBUG);
+
+const options = new cast.framework.CastReceiverOptions();
+options.disableIdleTimeout = true;
+context.start(options);
