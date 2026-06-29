@@ -27,195 +27,40 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
             background: #0d0d1a;
-            color: #ffffff;
         }
 
-        /* Blurred album-art backdrop, fills any aspect ratio */
-        #bg-art {
-            position: fixed;
-            inset: -5%;
-            width: 110%;
-            height: 110%;
-            background-image: url('/assets/achtergrond.jpg');
-            background-size: cover;
-            background-position: center;
-            filter: blur(40px) brightness(0.25) saturate(1.4);
-            z-index: 0;
-            transition: background-image 1.2s ease;
+        /* Logo shown in the corner while audio is playing.
+           --playback-logo-image is the only variable set on the body selector. */
+        body {
+            --playback-logo-image: url('/assets/logo-white.svg');
         }
 
-        #bg-overlay {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(135deg,
-                    rgba(0, 0, 0, 0.55) 0%,
-                    rgba(0, 0, 0, 0.30) 50%,
-                    rgba(0, 0, 0, 0.55) 100%);
-            z-index: 1;
-        }
-
-        /* Main stage — centered, scales with viewport units so it fits any TV */
-        #stage {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: clamp(2rem, 5vw, 6rem);
-            padding: clamp(2rem, 6vw, 7rem);
-        }
-
-        /* Album art */
-        #art-wrapper {
-            flex-shrink: 0;
-            width: clamp(160px, 36vh, 440px);
-            aspect-ratio: 1 / 1;
-        }
-
-        #album-art {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: clamp(0.5rem, 2vw, 2rem);
-            box-shadow:
-                0 0 0 1px rgba(255, 255, 255, 0.08),
-                0 clamp(0.5rem, 2vw, 2rem) clamp(2rem, 6vw, 6rem) rgba(0, 0, 0, 0.7);
-            transition: opacity 0.5s ease;
-        }
-
-        /* Text / info column */
-        #info {
-            display: flex;
-            flex-direction: column;
-            gap: clamp(0.6rem, 1.8vh, 1.8rem);
-            min-width: 0;
-            max-width: clamp(280px, 48vw, 900px);
-        }
-
-        #logo {
-            height: clamp(28px, 5.5vh, 72px);
-            width: auto;
-            object-fit: contain;
-            object-position: left center;
-            opacity: 0.95;
-            margin-bottom: clamp(0.2rem, 0.5vh, 0.8rem);
-        }
-
-        #live-badge {
-            display: none;
-            align-self: flex-start;
-            background: #e00;
-            color: #fff;
-            font-size: clamp(0.6rem, 1.4vw, 1.2rem);
-            font-weight: 900;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            padding: 0.25em 0.75em;
-            border-radius: 0.35em;
-        }
-
-        #title {
-            font-size: clamp(1.4rem, 4.5vw, 5rem);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -0.01em;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
-            word-break: break-word;
-            transition: opacity 0.4s ease;
-        }
-
-        #artist {
-            font-size: clamp(0.9rem, 2.5vw, 2.8rem);
-            font-weight: 300;
-            opacity: 0.78;
-            letter-spacing: 0.02em;
-            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
-            word-break: break-word;
-            transition: opacity 0.4s ease;
-        }
-
-        /* Animated "now playing" equalizer bars */
-        #equalizer {
-            display: flex;
-            align-items: flex-end;
-            gap: clamp(3px, 0.4vw, 6px);
-            height: clamp(20px, 3vh, 36px);
-            margin-top: clamp(0.2rem, 0.5vh, 0.8rem);
-        }
-
-        #equalizer .bar {
-            width: clamp(3px, 0.4vw, 6px);
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 2px;
-            animation: bounce 1.2s ease-in-out infinite;
-        }
-
-        #equalizer .bar:nth-child(2) { animation-delay: 0.2s; }
-        #equalizer .bar:nth-child(3) { animation-delay: 0.4s; }
-        #equalizer .bar:nth-child(4) { animation-delay: 0.1s; }
-        #equalizer .bar:nth-child(5) { animation-delay: 0.3s; }
-
-        @keyframes bounce {
-            0%, 100% { height: 20%; }
-            50%      { height: 100%; }
-        }
-
-        /* CAF requires this element; we run audio-only so it stays hidden */
+        /* Official Web Receiver player element, branded for M&K Combinatie.
+           It renders the metadata (title / artist / album art) that cast.js
+           puts on the media, and is responsive across every TV / aspect ratio. */
         cast-media-player {
-            display: none;
-        }
+            --background-color: #0d0d1a;
+            --background-image: radial-gradient(circle at 30% 30%, #1b1b35 0%, #0d0d1a 70%);
 
-        /* Portrait / narrow displays (vertical TV, phone test) -> stack vertically */
-        @media (max-aspect-ratio: 4/5) {
-            #stage {
-                flex-direction: column;
-                text-align: center;
-                gap: clamp(1.5rem, 4vh, 4rem);
-            }
-            #art-wrapper { width: clamp(140px, 55vw, 320px); }
-            #info { align-items: center; max-width: 90vw; }
-            #logo { object-position: center; }
-            #live-badge { align-self: center; }
-        }
+            /* Brand green (#04aa6d ≈ hue 158) drives progress bar + accents */
+            --theme-hue: 158;
+            --progress-color: #04aa6d;
 
-        /* Ultra-wide (21:9 and beyond) */
-        @media (min-aspect-ratio: 21/9) {
-            #stage { gap: clamp(3rem, 6vw, 8rem); }
-            #art-wrapper { width: clamp(180px, 40vh, 400px); }
+            --font-family: 'Montserrat', sans-serif;
+
+            /* Logo on launch, splash while idle, watermark during playback */
+            --logo-image: url('/assets/logo-white.svg');
+            --splash-image: url('/assets/logo-white.svg');
+            --splash-size: 32vmin;
+            --watermark-image: url('/assets/logo-white.svg');
+            --watermark-size: 12vmin;
+            --watermark-position: top left;
         }
     </style>
 </head>
 
 <body>
-    <div id="bg-art"></div>
-    <div id="bg-overlay"></div>
-
-    <main id="stage">
-        <div id="art-wrapper">
-            <img id="album-art" src="/assets/logo-white.svg" alt="Album art">
-        </div>
-
-        <div id="info">
-            <img id="logo" src="/assets/logo-white.svg" alt="M&K Combinatie">
-            <span id="live-badge">Live</span>
-            <div id="title">M&amp;K Combinatie</div>
-            <div id="artist">Live Radio</div>
-            <div id="equalizer">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Required CAF element (hidden, audio only) -->
     <cast-media-player></cast-media-player>
 
     <script src="/cast.js"></script>

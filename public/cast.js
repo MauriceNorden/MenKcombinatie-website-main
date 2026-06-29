@@ -6,8 +6,15 @@
 
 const STREAM_URL   = 'https://radio.mndevs.host/radio/8000/radio.mp3';
 const API_BASE     = 'https://radio.prod.mndevs.host/api/nowplaying/1';
-const FALLBACK_ART = '/assets/logo-white.svg';
-const FALLBACK_BG  = '/assets/achtergrond.jpg';
+const FALLBACK_ART = location.origin + '/assets/logo-white.svg';
+
+// Latest now-playing info; seeded with sensible defaults so the very first
+// LOAD already carries metadata before the AzuraCast feed has been fetched.
+let currentMeta = {
+    title:  'M&K Combinatie',
+    artist: 'Live Radio',
+    art:    FALLBACK_ART,
+};
 
 // -----------------------------------------------------
 // CAF receiver setup
@@ -15,16 +22,27 @@ const FALLBACK_BG  = '/assets/achtergrond.jpg';
 const context       = cast.framework.CastReceiverContext.getInstance();
 const playerManager = context.getPlayerManager();
 
+// Metadata shown by the Cast UI / sender notification / lock screen.
+function buildCastMetadata() {
+    const meta = new cast.framework.messages.MusicTrackMediaMetadata();
+    meta.title    = currentMeta.title;
+    meta.artist   = currentMeta.artist;
+    meta.albumName = 'M&K Combinatie Radio';
+    meta.images   = [new cast.framework.messages.Image(currentMeta.art)];
+    return meta;
+}
+
 function makeMedia() {
     const media = new cast.framework.messages.MediaInformation();
     media.contentId   = STREAM_URL;
     media.contentUrl  = STREAM_URL;
     media.contentType = 'audio/mpeg';
     media.streamType  = cast.framework.messages.StreamType.LIVE;
+    media.metadata    = buildCastMetadata();
     return media;
 }
 
-// Whatever the sender asks to load, force our radio stream.
+// Whatever the sender asks to load, force our radio stream + metadata.
 playerManager.setMessageInterceptor(
     cast.framework.messages.MessageType.LOAD,
     (loadRequest) => {
@@ -48,15 +66,20 @@ const options = new cast.framework.CastReceiverOptions();
 options.disableIdleTimeout = true; // keep the radio screen up indefinitely
 context.start(options);
 
-// -----------------------------------------------------
-// Now-playing UI  (ported from public/script.js:107-167)
-// -----------------------------------------------------
-const titleEl  = document.getElementById('title');
-const artistEl = document.getElementById('artist');
-const artEl    = document.getElementById('album-art');
-const bgEl     = document.getElementById('bg-art');
-const liveEl   = document.getElementById('live-badge');
+// Push the freshest metadata onto the already-playing stream so the Cast UI
+// and any sender notifications update without interrupting playback.
+function refreshCastMetadata() {
+    const mediaInfo = playerManager.getMediaInformation();
+    if (!mediaInfo) return;
+    mediaInfo.metadata = buildCastMetadata();
+    playerManager.setMediaInformation(mediaInfo, /* broadcast */ true);
+}
 
+// -----------------------------------------------------
+// Now-playing feed  (ported from public/script.js:107-167)
+// Feeds the built-in <cast-media-player>, which renders the
+// title / artist / album art from the media metadata.
+// -----------------------------------------------------
 async function getNowPlaying() {
     const res = await fetch(API_BASE);
     if (!res.ok) throw new Error('Failed to fetch now playing');
@@ -79,15 +102,10 @@ function buildMetadata(data) {
 async function updateNowPlaying() {
     try {
         const data = await getNowPlaying();
-        const { isLive, title, artist, art } = buildMetadata(data);
+        const { title, artist, art } = buildMetadata(data);
 
-        titleEl.textContent  = title;
-        artistEl.textContent = artist;
-
-        artEl.src = art || FALLBACK_ART;
-        bgEl.style.backgroundImage = `url('${art || FALLBACK_BG}')`;
-
-        liveEl.style.display = isLive ? 'inline-block' : 'none';
+        currentMeta = { title, artist, art: art || FALLBACK_ART };
+        refreshCastMetadata();
     } catch (err) {
         console.error('Now playing update failed:', err);
     }
