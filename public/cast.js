@@ -4,41 +4,41 @@
 // Runs ON the Chromecast device, served at /cast
 // =====================================================
 
-const STREAM_URL   = 'https://radio.mndevs.host/radio/8000/radio.mp3';
-const API_BASE     = 'https://radio.prod.mndevs.host/api/nowplaying/1';
-const FALLBACK_ART = location.origin + '/assets/logo-white.svg';
+const STREAM_URL = 'https://radio.mndevs.host/radio/8000/radio.mp3';
+const API_BASE = 'https://radio.prod.mndevs.host/api/nowplaying/1';
+const FALLBACK_ART = location.origin + '/assets/backogrund.png';
 
 // Latest now-playing info; seeded with sensible defaults so the very first
 // LOAD already carries metadata before the AzuraCast feed has been fetched.
 let currentMeta = {
-    title:  'M&K Combinatie',
+    title: 'M&K Combinatie',
     artist: 'Live Radio',
-    art:    FALLBACK_ART,
+    art: FALLBACK_ART,
 };
 
 // -----------------------------------------------------
 // CAF receiver setup
 // -----------------------------------------------------
-const context       = cast.framework.CastReceiverContext.getInstance();
+const context = cast.framework.CastReceiverContext.getInstance();
 const playerManager = context.getPlayerManager();
 
 // Metadata shown by the Cast UI / sender notification / lock screen.
 function buildCastMetadata() {
     const meta = new cast.framework.messages.MusicTrackMediaMetadata();
-    meta.title    = currentMeta.title;
-    meta.artist   = currentMeta.artist;
+    meta.title = currentMeta.title;
+    meta.artist = currentMeta.artist;
     meta.albumName = 'M&K Combinatie Radio';
-    meta.images   = [new cast.framework.messages.Image(currentMeta.art)];
+    meta.images = [new cast.framework.messages.Image(currentMeta.art)];
     return meta;
 }
 
 function makeMedia() {
     const media = new cast.framework.messages.MediaInformation();
-    media.contentId   = STREAM_URL;
-    media.contentUrl  = STREAM_URL;
+    media.contentId = STREAM_URL;
+    media.contentUrl = STREAM_URL;
     media.contentType = 'audio/mpeg';
-    media.streamType  = cast.framework.messages.StreamType.LIVE;
-    media.metadata    = buildCastMetadata();
+    media.streamType = cast.framework.messages.StreamType.LIVE;
+    media.metadata = buildCastMetadata();
     return media;
 }
 
@@ -87,15 +87,15 @@ async function getNowPlaying() {
 }
 
 function buildMetadata(data) {
-    const song   = data.now_playing.song;
-    const live   = data.live;
+    const song = data.now_playing.song;
+    const live = data.live;
     const isLive = live?.is_live;
 
     return {
         isLive,
-        title:  isLive ? live.streamer_name       : (song.title  || 'M&K Combinatie'),
-        artist: isLive ? 'Live op M&K Combinatie'  : (song.artist || 'Live Radio'),
-        art:    isLive ? live.art                  : song.art,
+        title: isLive ? live.streamer_name : (song.title || 'M&K Combinatie'),
+        artist: isLive ? 'Live op M&K Combinatie' : (song.artist || 'Live Radio'),
+        art: isLive ? live.art : song.art,
     };
 }
 
